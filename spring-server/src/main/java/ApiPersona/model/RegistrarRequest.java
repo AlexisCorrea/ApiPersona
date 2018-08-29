@@ -8,6 +8,8 @@ import com.amazonaws.services.dynamodbv2.datamodeling.DynamoDBTable;
 import com.fasterxml.jackson.annotation.JsonCreator;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+
+
 import org.springframework.validation.annotation.Validated;
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -37,6 +39,9 @@ public class RegistrarRequest   {
 
   @JsonProperty("telefono")
   private String telefono = null;
+  
+  @JsonProperty("ciudad")
+  private String ciudad = null;
 
   @JsonProperty("genero")
   private String genero = null;
@@ -180,6 +185,27 @@ public class RegistrarRequest   {
     this.genero = genero;
     return this;
   }
+  
+  public RegistrarRequest ciudad(String ciudad) {
+	    this.ciudad = ciudad;
+	    return this;
+	  }
+
+	  /**
+	   * Get ciudad
+	   * @return ciudad
+	  **/
+	  @ApiModelProperty(required = true, value = "")
+	  @NotNull
+
+	  @DynamoDBAttribute
+	  public String getCiudad() {
+	    return ciudad;
+	  }
+
+	  public void setCiudad(String ciudad) {
+	    this.ciudad = ciudad;
+	  }
 
   /**
    * Get genero
@@ -276,6 +302,7 @@ public class RegistrarRequest   {
         Objects.equals(this.correo, registrarRequest.correo) &&
         Objects.equals(this.contrasena, registrarRequest.contrasena) &&
         Objects.equals(this.telefono, registrarRequest.telefono) &&
+        Objects.equals(this.ciudad, registrarRequest.ciudad) &&
         Objects.equals(this.genero, registrarRequest.genero) &&
         Objects.equals(this.rol, registrarRequest.rol) &&
         Objects.equals(this.estado, registrarRequest.estado) &&
@@ -284,7 +311,7 @@ public class RegistrarRequest   {
 
   @Override
   public int hashCode() {
-    return Objects.hash(id, nombre, apellidos, correo, contrasena, telefono, genero, rol, estado, token);
+    return Objects.hash(id, nombre, apellidos, correo, contrasena, telefono, ciudad,genero, rol, estado, token);
   }
 
   @Override
@@ -298,6 +325,7 @@ public class RegistrarRequest   {
     sb.append("    correo: ").append(toIndentedString(correo)).append("\n");
     sb.append("    contrasena: ").append(toIndentedString(contrasena)).append("\n");
     sb.append("    telefono: ").append(toIndentedString(telefono)).append("\n");
+    sb.append("    ciudad: ").append(toIndentedString(ciudad)).append("\n");
     sb.append("    genero: ").append(toIndentedString(genero)).append("\n");
     sb.append("    rol: ").append(toIndentedString(rol)).append("\n");
     sb.append("    estado: ").append(toIndentedString(estado)).append("\n");
